@@ -1,0 +1,64 @@
+.header {
+	display: grid;
+	padding: 40px 0 25px 0;
+	gap: 30px;
+	& > h1 {
+		font-weight: 700;
+		font-size: 2.2rem;
+		line-height: 1.2;
+	}
+
+	& > p {
+		line-height: 1.2;
+		display: grid;
+		gap: 9px;
+		color: #888787;
+		font-size: 1.2rem;
+		font-weight: 400;
+		& span {
+			font-style: italic;
+			font-weight: 500;
+			font-size: 1.1rem;
+			color: #666666;
+		}
+	}
+
+	.input {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		max-width: 600px;
+		margin: 0 auto;
+		width: 100%;
+		gap: 20px;
+		height: 65px;
+		border-radius: 30px;
+		border: 2.5px solid #e36b16;
+		overflow: hidden;
+
+		& > input {
+			height: 100%;
+			width: 100%;
+			padding: 0 20px;
+			color: #222222;
+			font-weight: 600;
+			font-size: 1.05rem;
+
+			&::placeholder {
+				color: #666666;
+				font-weight: 500;
+			}
+		}
+
+		& > button {
+			height: 100%;
+			background: #e36b16;
+			padding: 0 25px;
+			color: #fff;
+			transition: all 0.3s;
+			&:hover {
+				background: #f39511;
+			}
+		}
+	}
+}

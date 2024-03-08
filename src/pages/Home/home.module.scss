@@ -7,30 +7,4 @@
 		display: grid;
 		gap: 30px;
 	}
-
-	.header {
-		display: grid;
-		padding: 40px 0 25px 0;
-		gap: 30px;
-		& > h1 {
-			font-weight: 700;
-			font-size: 2.2rem;
-			line-height: 1.2;
-		}
-
-		& > p {
-			line-height: 1.2;
-			display: grid;
-			gap: 9px;
-			color: #888787;
-			font-size: 1.2rem;
-			font-weight: 400;
-			& span {
-				font-style: italic;
-				font-weight: 500;
-				font-size: 1.1rem;
-				color: #666666;
-			}
-		}
-	}
 }
