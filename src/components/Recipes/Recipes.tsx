@@ -20,7 +20,7 @@ const Recipes = () => {
 				{!items || items.length === 0 ? (
 					<p>Here will be your search results...</p>
 				) : !isLoading ? (
-					items.map(item => <Recipe key={item} />)
+					items.map((item, index) => <Recipe key={item} id={index} />)
 				) : (
 					<>
 						<RecipeSkeleton />
