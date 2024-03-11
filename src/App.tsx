@@ -1,10 +1,15 @@
-import { Home } from './pages'
+import { Outlet } from 'react-router-dom'
+import { Favorite } from './components/Favorites/Favorite'
+import { Container } from './uikit'
 
 function App() {
 	return (
 		<>
 			<div className='wrapper'>
-				<Home />
+				<Container className='container'>
+					<Favorite />
+					<Outlet />
+				</Container>
 			</div>
 		</>
 	)

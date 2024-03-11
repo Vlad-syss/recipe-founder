@@ -1,0 +1,26 @@
+.like {
+	display: inline-flex;
+	// padding: 0 40px;
+	justify-content: flex-end;
+	position: relative;
+
+	& > span {
+		position: absolute;
+		width: 20px;
+		height: 20px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		right: -5px;
+		font-size: 0.7rem;
+		bottom: -5px;
+		background: #e16704;
+		color: #fff;
+		pointer-events: none;
+	}
+
+	& > button {
+		background: transparent;
+	}
+}
