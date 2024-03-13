@@ -49,10 +49,9 @@
 	.recipe_img {
 		height: 280px;
 		flex: 0 0 auto;
-		background: url('https://media.cnn.com/api/v1/images/stellar/prod/220526171611-11-classic-french-dishes-ratatouille.jpg?c=original')
-			no-repeat center;
+		// background: url('https://media.cnn.com/api/v1/images/stellar/prod/220526171611-11-classic-french-dishes-ratatouille.jpg?c=original')
+		// no-repeat center;
 		transition: all 0.3s;
-		background-size: cover;
 		backdrop-filter: opacity(20%);
 
 		&:hover {

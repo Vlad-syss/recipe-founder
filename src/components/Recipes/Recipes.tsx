@@ -1,54 +1,55 @@
-import { QueryKey, UseQueryResult, useQuery } from '@tanstack/react-query'
-import { FC, useState } from 'react'
-import { getAllRecipes } from '../../api'
-import { RecipeType } from '../../types'
+import { useIntersection } from '@mantine/hooks'
+import { FC, useEffect } from 'react'
+import { useInfinityRecipe } from '../../hooks'
 import RecipeSkeleton from '../Skeleton/RecipeSkeleton/RecipeSkeleton'
-import { Recipe } from './Recipe'
+import { RecipeList } from './RecipeList'
 import style from './recipes.module.scss'
+
+const Skeleton = () => (
+	<>
+		<RecipeSkeleton />
+		<RecipeSkeleton />
+		<RecipeSkeleton />
+	</>
+)
 
 interface RecipesProps {}
 
 const Recipes: FC<RecipesProps> = () => {
-	const [items, setItems] = useState(6)
 	const {
 		data,
 		isError,
+		fetchNextPage,
 		isFetching,
-	}: UseQueryResult<{ count: number; results: RecipeType[] }> = useQuery({
-		queryKey: ['recipes'] as QueryKey,
-		queryFn: getAllRecipes,
+		isFetchingNextPage,
+		isFetchingFirstPage,
+	} = useInfinityRecipe()
+
+	const { ref, entry } = useIntersection({
+		root: null,
+		threshold: 1,
 	})
-	console.log(data)
 
-	const formattedData = data?.results.slice(0, items)
+	useEffect(() => {
+		if (entry?.isIntersecting) fetchNextPage()
+	}, [entry])
 
-	const loadMore = () => {
-		setItems(prev => prev + 3)
-	}
+	const recipes = data?.pages.flatMap(page => page.results) || []
 
 	return (
 		<main className={style.main}>
 			<h2>Your Search Results:</h2>
 			<div className={style.items}>
-				{isFetching ? (
-					<>
-						<RecipeSkeleton />
-						<RecipeSkeleton />
-						<RecipeSkeleton />
-					</>
-				) : isError ? (
+				{isError ? (
 					<p>Something go wrong...</p>
-				) : !formattedData || formattedData.length === 0 ? (
-					<p>Here will be your search results...</p>
+				) : isFetching && isFetchingFirstPage ? (
+					<Skeleton />
 				) : (
-					formattedData.map((item: RecipeType) => {
-						return <Recipe key={item.id} {...item} />
-					})
+					<RecipeList recipes={recipes} />
 				)}
+				{isFetchingNextPage && <Skeleton />}
+				<div ref={ref}></div>
 			</div>
-			<button onClick={loadMore}>
-				{items === data?.results.length ? '' : 'ADD MORE'}
-			</button>
 		</main>
 	)
 }

@@ -7,7 +7,7 @@ import style from './recipes.module.scss'
 
 interface RecipeProps extends RecipeType {}
 
-const Recipe: FC<RecipeProps> = ({ id, description, name }) => {
+const Recipe: FC<RecipeProps> = ({ id, description, name, thumbnail_url }) => {
 	const checkInFavorite = useFavorite(state => state.checkInFavorite)
 	const initialState = useFavorite(state => state.initialState)
 	const isExist = initialState.some(r => r.id === id)
@@ -18,7 +18,13 @@ const Recipe: FC<RecipeProps> = ({ id, description, name }) => {
 
 	return (
 		<article className={style.item}>
-			<div className={style.recipe_img} />
+			<div
+				className={style.recipe_img}
+				style={{
+					background: `url(${thumbnail_url}) no-repeat center`,
+					backgroundSize: 'cover',
+				}}
+			/>
 			<div className={style.recipe_info}>
 				<h4>{name}</h4>
 				<p

@@ -53,3 +53,8 @@ export type Show = {
 	id: number
 	name: string
 }
+
+export type InfinityRecipe = {
+	pageParams: number[]
+	pages: { count: number; results: RecipeType[] }[]
+}

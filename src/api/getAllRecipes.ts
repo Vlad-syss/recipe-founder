@@ -1,7 +1,9 @@
 import axios from 'axios'
 import { RecipeType } from '../types'
 
-export const getAllRecipes = async (): Promise<{
+export const getAllRecipes = async (
+	page: number
+): Promise<{
 	count: number
 	results: RecipeType[]
 }> => {
@@ -24,7 +26,12 @@ export const getAllRecipes = async (): Promise<{
 			count: number
 			results: RecipeType[]
 		}>(options)
-		return data
+		const formattedData = {
+			...data,
+			results: data.results.slice((page - 1) * 6, page * 6),
+		}
+
+		return formattedData
 	} catch (error) {
 		console.error(error)
 		throw error
