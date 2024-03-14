@@ -1,11 +1,11 @@
 import { useIntersection } from '@mantine/hooks'
 import { FC, useEffect } from 'react'
 import { useInfinityRecipe } from '../../hooks'
-import RecipeSkeleton from '../Skeleton/RecipeSkeleton/RecipeSkeleton'
+import RecipeSkeleton from '../Skeleton/RecipeSkeleton'
 import { RecipeList } from './RecipeList'
 import style from './recipes.module.scss'
 
-const Skeleton = () => (
+export const Skeleton = () => (
 	<>
 		<RecipeSkeleton />
 		<RecipeSkeleton />

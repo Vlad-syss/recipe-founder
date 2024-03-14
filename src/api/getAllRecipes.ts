@@ -16,7 +16,7 @@ export const getAllRecipes = async (
 			tags: 'under_30_minutes',
 		},
 		headers: {
-			'X-RapidAPI-Key': '13aaa10f7emsh2448898eda0fee6p1ca3a2jsnbcbb857fc697',
+			'X-RapidAPI-Key': '08bae70f1bmsh4b2b14ecfec59b5p197001jsn0e7bfdb311b3',
 			'X-RapidAPI-Host': 'tasty.p.rapidapi.com',
 		},
 	}
