@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-interface Recipe {
+export interface Recipe {
 	id: number
 }
 
