@@ -42,12 +42,14 @@ const RecipeCard = () => {
 					<div className={style.similiar}>
 						{isFetching ? (
 							<Skeleton />
-						) : (
+						) : data?.compilations.length !== 0 ? (
 							data?.compilations.map((item: Compilation) => (
 								<Fragment key={item.id}>
 									<RecipeItem recipe={item} />
 								</Fragment>
 							))
+						) : (
+							<p>there are no same products!</p>
 						)}
 					</div>
 				</div>

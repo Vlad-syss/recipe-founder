@@ -7,6 +7,7 @@ export interface Recipe {
 type FavoriteStore = {
 	initialState: Recipe[]
 	checkInFavorite: (recipeId: number) => void
+	removeFromBacket: (recipeId: number) => void
 }
 
 const useFavorite = create<FavoriteStore>(set => ({
@@ -24,6 +25,10 @@ const useFavorite = create<FavoriteStore>(set => ({
 			}
 		})
 	},
+	removeFromBacket: recipeId =>
+		set(state => ({
+			initialState: state.initialState.filter(recipe => recipe.id !== recipeId),
+		})),
 }))
 
 export { useFavorite }

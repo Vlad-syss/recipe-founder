@@ -1,6 +1,7 @@
 import { NotebookText } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { usePopup } from '../../hooks'
 import { useFavorite } from '../../store'
 import { FavoritesBacket } from '../FavoritesBacket/FavoritesBacket'
 import style from './favorite.module.scss'
@@ -14,38 +15,13 @@ const Favorite = () => {
 	const timeout = 800
 	let unlock = true
 
-	const popupOpen = (currentPopup: any) => {
-		if (currentPopup && isOpen === true) {
-			popupClose()
-		} else {
-			bodyLock()
-		}
-		setIsOpen(true)
-	}
-
-	const popupClose = () => {
-		setIsOpen(false)
-		bodyUnlock()
-	}
-
-	const bodyLock = () => {
-		const padding = window.innerWidth - document.body.offsetWidth + 'px'
-
-		document.body.style.paddingRight = padding
-		document.body.classList.add(style.lock)
-
-		unlock = false
-		setTimeout(() => {
-			unlock = true
-		}, timeout)
-	}
-
-	const bodyUnlock = () => {
-		setTimeout(() => {
-			document.body.style.paddingRight = '0px'
-			document.body.classList.remove(style.lock)
-		}, timeout)
-	}
+	const { popupClose, popupOpen } = usePopup({
+		isOpen: isOpen,
+		lock: style.lock,
+		setIsOpen: setIsOpen,
+		timeout: timeout,
+		unlock: unlock,
+	})
 
 	return (
 		<div className={style.like}>

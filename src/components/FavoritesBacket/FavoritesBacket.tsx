@@ -1,6 +1,13 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import clsx from 'clsx'
-import { Dispatch, FC, MouseEvent, SetStateAction, useRef } from 'react'
+import {
+	Dispatch,
+	FC,
+	MouseEvent,
+	SetStateAction,
+	useEffect,
+	useRef,
+} from 'react'
 import { getRecipesByIds } from '../../api/getRecipesByIds'
 import { Recipe } from '../../store/useFavorite'
 import BacketSkeleton from '../Skeleton/BacketSkeleton'
@@ -33,6 +40,7 @@ const FavoritesBacket: FC<BacketProps> = ({
 	popupClose,
 }) => {
 	const ref = useRef<HTMLDivElement>(null)
+	const queryClient = useQueryClient()
 
 	const handleClick = (event: MouseEvent<HTMLDivElement>) => {
 		if (ref.current && event.target === ref.current) {
@@ -45,6 +53,12 @@ const FavoritesBacket: FC<BacketProps> = ({
 		queryFn: () => getRecipesByIds(favorites.map(item => item.id)),
 		enabled: isOpen,
 	})
+
+	useEffect(() => {
+		if (isOpen) {
+			queryClient.invalidateQueries({ queryKey: ['favoriteRecipes'] })
+		}
+	}, [isOpen, favorites])
 
 	return (
 		<div

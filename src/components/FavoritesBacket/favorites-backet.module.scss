@@ -62,6 +62,7 @@
 	grid-template-columns: minmax(50px, 0.4fr) 1fr;
 	gap: 15px;
 	box-shadow: 1px 1px 6px #00000061;
+	position: relative;
 
 	.image {
 		overflow: hidden;
@@ -103,6 +104,17 @@
 			background: #ffa200;
 			color: #fff;
 			text-align: center;
+		}
+	}
+
+	.remove {
+		position: absolute;
+		top: 2px;
+		right: 2px;
+		background: transparent;
+		color: red;
+		&:hover {
+			transition: all 0.3s;
 		}
 	}
 }
