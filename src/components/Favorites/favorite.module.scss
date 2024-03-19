@@ -1,3 +1,39 @@
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px;
+	padding: 5px 5px 0px 10px;
+	.catalog {
+		font-size: 1.3rem;
+		text-transform: uppercase;
+		font-weight: 700;
+		letter-spacing: 1px;
+		position: relative;
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		&::before {
+			content: '';
+			position: absolute;
+			left: 0;
+			width: 0;
+			height: 2px;
+			bottom: -7px;
+			color: #222222;
+			background: #222222;
+			transition: all 0.3s;
+		}
+		&:hover {
+			&::before {
+				width: 50%;
+			}
+			svg {
+				animation: bounce 0.5s;
+			}
+		}
+	}
+}
 .like {
 	display: inline-flex;
 	// padding: 0 40px;
@@ -27,4 +63,14 @@
 
 .lock {
 	overflow: hidden;
+}
+
+@keyframes bounce {
+	0%,
+	100% {
+		transform: translateY(0%);
+	}
+	50% {
+		transform: translateY(-30%);
+	}
 }

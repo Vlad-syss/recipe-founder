@@ -1,6 +1,7 @@
-import { NotebookText } from 'lucide-react'
+import { CookingPot, NotebookText } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { Link } from 'react-router-dom'
 import { usePopup } from '../../hooks'
 import { useFavorite } from '../../store'
 import { FavoritesBacket } from '../FavoritesBacket/FavoritesBacket'
@@ -24,21 +25,27 @@ const Favorite = () => {
 	})
 
 	return (
-		<div className={style.like}>
-			<span>{favorites.length}</span>
-			<button onClick={() => popupOpen(btnRef.current)} ref={btnRef}>
-				<NotebookText size={30} />
-			</button>
-			{root &&
-				createPortal(
-					<FavoritesBacket
-						favorites={favorites}
-						isOpen={isOpen}
-						setIsOpen={setIsOpen}
-						popupClose={popupClose}
-					/>,
-					root
-				)}
+		<div className={style.header}>
+			<Link to={'/products'} className={style.catalog}>
+				<CookingPot />
+				Catalog
+			</Link>
+			<div className={style.like}>
+				<span>{favorites.length}</span>
+				<button onClick={() => popupOpen(btnRef.current)} ref={btnRef}>
+					<NotebookText size={30} />
+				</button>
+				{root &&
+					createPortal(
+						<FavoritesBacket
+							favorites={favorites}
+							isOpen={isOpen}
+							setIsOpen={setIsOpen}
+							popupClose={popupClose}
+						/>,
+						root
+					)}
+			</div>
 		</div>
 	)
 }

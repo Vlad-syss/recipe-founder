@@ -5,7 +5,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { App } from './App'
 import { Page404 } from './components/404/404'
 import './index.scss'
-import { Home, RecipeCard } from './pages'
+import { Catalog, Home, RecipeCard } from './pages'
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -28,6 +28,10 @@ const router = createBrowserRouter([
 			{
 				path: 'products/:id',
 				element: <RecipeCard />,
+			},
+			{
+				path: 'products',
+				element: <Catalog />,
 			},
 		],
 	},

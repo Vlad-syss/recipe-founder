@@ -3,7 +3,7 @@ import { RecipeType } from '../types'
 
 export const headers = {
 	'X-RapidAPI-Key': 'c3a737d84fmsh4df698accaf3784p1310aajsn75d969c409cb',
-	'X-RapidAPI-Host': 'tasty.p.rapidapi.com'
+	'X-RapidAPI-Host': 'tasty.p.rapidapi.com',
 }
 
 export const getAllRecipes = async (
@@ -17,7 +17,7 @@ export const getAllRecipes = async (
 		url: 'https://tasty.p.rapidapi.com/recipes/list',
 		params: {
 			from: '0',
-			size: '20',
+			size: '50',
 			tags: 'under_30_minutes',
 		},
 		headers: headers,

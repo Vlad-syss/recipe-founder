@@ -33,7 +33,12 @@ const ProductItem: FC<ProductProps> = ({ data }) => {
 					</div>
 					<div className={style.block}>
 						<h3>
-							Prepare time: <span>{data.prep_time_minutes} mn</span>
+							Prepare time:{' '}
+							<span>
+								{data.prep_time_minutes !== null
+									? data.prep_time_minutes + 'mn'
+									: "Information doesn't exist"}
+							</span>
 						</h3>
 					</div>
 					<div className={style.block}>
@@ -59,10 +64,15 @@ const ProductItem: FC<ProductProps> = ({ data }) => {
 						</p>
 					</div>
 					<h2>{data.name}</h2>
-					<div className={style.block}>
-						<h3>Description:</h3>
-						<p>{data.description}</p>
-					</div>
+					{data.description !== '' ? (
+						<div className={style.block}>
+							<h3>Description:</h3>
+							<p>{data.description}</p>
+						</div>
+					) : (
+						''
+					)}
+
 					<div className={style.block}>
 						<h3>Instruction:</h3>
 						<ul>

@@ -16,6 +16,7 @@ const useInfinityRecipe = () => {
 		fetchNextPage,
 		isFetching,
 		isFetchingNextPage,
+		refetch,
 	}: UseInfiniteQueryResult<InfinityRecipe> = useInfiniteQuery({
 		queryKey: ['recipes'] as QueryKey,
 		queryFn: async ({ pageParam = 1 }) => {
@@ -34,6 +35,7 @@ const useInfinityRecipe = () => {
 		isFetching,
 		isFetchingNextPage,
 		isFetchingFirstPage,
+		refetch,
 	}
 }
 

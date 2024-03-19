@@ -8,7 +8,7 @@ import {
 	useEffect,
 	useRef,
 } from 'react'
-import { getRecipesByIds } from '../../api/getRecipesByIds'
+import { getRecipesByIds } from '../../api'
 import { Recipe } from '../../store/useFavorite'
 import BacketSkeleton from '../Skeleton/BacketSkeleton'
 import { FavoritesElement } from './FavoritesElement'
