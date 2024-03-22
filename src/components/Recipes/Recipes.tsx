@@ -2,17 +2,9 @@ import { useIntersection } from '@mantine/hooks'
 import { FC, useEffect } from 'react'
 import { useInfinityRecipe } from '../../hooks'
 import { SearchKeys } from '../../types'
-import RecipeSkeleton from '../Skeleton/RecipeSkeleton'
+import { SkeletonForRecipes } from '../Skeleton/RecipeSkeleton'
 import { RecipeList } from './RecipeList'
 import style from './recipes.module.scss'
-
-export const Skeleton = () => (
-	<>
-		<RecipeSkeleton />
-		<RecipeSkeleton />
-		<RecipeSkeleton />
-	</>
-)
 
 interface RecipesProps {
 	filteredData: SearchKeys[] | null
@@ -40,20 +32,19 @@ const Recipes: FC<RecipesProps> = ({ filteredData }) => {
 	}, [entry])
 
 	const recipes = data?.pages.flatMap(page => page.results) || []
-	console.log(data)
 
 	return (
 		<main className={style.main}>
 			<h2>Your Search Results:</h2>
+			{isError && <p>Something go wrong...</p>}
 			<div className={style.items}>
-				{isError ? (
-					<p>Something go wrong...</p>
-				) : isFetching && isFetchingFirstPage ? (
-					<Skeleton />
+				{(isFetching && isFetchingFirstPage) ||
+				(!!filteredData && isFetching && !isFetchingNextPage) ? (
+					<SkeletonForRecipes />
 				) : (
 					<RecipeList recipes={recipes} />
 				)}
-				{isFetchingNextPage && <Skeleton />}
+				{isFetchingNextPage && <SkeletonForRecipes />}
 				<div ref={ref}></div>
 			</div>
 		</main>

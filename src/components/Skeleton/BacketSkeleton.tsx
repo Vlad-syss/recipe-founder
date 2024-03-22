@@ -27,4 +27,17 @@ BacketSkeleton.metadata = {
 	filename: 'ShoppingLoader',
 }
 
+export const SkeletonForBacket = () => (
+	<>
+		<BacketSkeleton />
+		<BacketSkeleton />
+		<BacketSkeleton />
+		<BacketSkeleton />
+		<BacketSkeleton />
+		<BacketSkeleton />
+		<BacketSkeleton />
+		<BacketSkeleton />
+	</>
+)
+
 export default BacketSkeleton

@@ -32,7 +32,6 @@ export const getFilteredRecipes = async (
 		)
 
 		const combinedData = responseData.flat()
-		console.log(combinedData)
 
 		return {
 			count: 10,

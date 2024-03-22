@@ -2,6 +2,7 @@
 	display: grid;
 	padding: 25px 0;
 	gap: 30px;
+
 	& > h1 {
 		font-weight: 700;
 		font-size: 2.2rem;
@@ -15,6 +16,7 @@
 		color: #888787;
 		font-size: 1.2rem;
 		font-weight: 400;
+
 		& span {
 			font-style: italic;
 			font-weight: 500;
@@ -36,6 +38,13 @@
 		border: 2.5px solid #e36b16;
 		overflow: hidden;
 
+		&.disabled {
+			opacity: 0.5;
+			button > svg {
+				animation: load 0.8s infinite;
+			}
+		}
+
 		& > input {
 			height: 100%;
 			width: 100%;
@@ -47,9 +56,19 @@
 			padding: 0 25px;
 			color: #fff;
 			transition: all 0.3s;
+
 			&:hover {
 				background: #f39511;
 			}
 		}
+	}
+}
+
+@keyframes load {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
 	}
 }

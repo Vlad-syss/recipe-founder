@@ -1,16 +1,8 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query'
 import clsx from 'clsx'
-import {
-	Dispatch,
-	FC,
-	MouseEvent,
-	SetStateAction,
-	useEffect,
-	useRef,
-} from 'react'
-import { getRecipesByIds } from '../../api'
+import { Dispatch, FC, MouseEvent, SetStateAction, useRef } from 'react'
+import { useFavoriteRecipesQuery } from '../../hooks'
 import { Recipe } from '../../store/useFavorite'
-import BacketSkeleton from '../Skeleton/BacketSkeleton'
+import { SkeletonForBacket } from '../Skeleton/BacketSkeleton'
 import { FavoritesElement } from './FavoritesElement'
 import style from './favorites-backet.module.scss'
 
@@ -21,26 +13,12 @@ interface BacketProps {
 	popupClose: () => void
 }
 
-const Skeleton = () => (
-	<>
-		<BacketSkeleton />
-		<BacketSkeleton />
-		<BacketSkeleton />
-		<BacketSkeleton />
-		<BacketSkeleton />
-		<BacketSkeleton />
-		<BacketSkeleton />
-		<BacketSkeleton />
-	</>
-)
-
 const FavoritesBacket: FC<BacketProps> = ({
 	isOpen,
 	favorites,
 	popupClose,
 }) => {
 	const ref = useRef<HTMLDivElement>(null)
-	const queryClient = useQueryClient()
 
 	const handleClick = (event: MouseEvent<HTMLDivElement>) => {
 		if (ref.current && event.target === ref.current) {
@@ -48,17 +26,7 @@ const FavoritesBacket: FC<BacketProps> = ({
 		}
 	}
 
-	const { data, isFetching } = useQuery({
-		queryKey: ['favoriteRecipes'],
-		queryFn: () => getRecipesByIds(favorites.map(item => item.id)),
-		enabled: isOpen,
-	})
-
-	useEffect(() => {
-		if (isOpen) {
-			queryClient.invalidateQueries({ queryKey: ['favoriteRecipes'] })
-		}
-	}, [isOpen, favorites])
+	const { data, isFetching } = useFavoriteRecipesQuery(isOpen, favorites)
 
 	return (
 		<div
@@ -70,7 +38,7 @@ const FavoritesBacket: FC<BacketProps> = ({
 				<h3 className={style.title}>Favorites Recipes:</h3>
 				<div className={style.items}>
 					{isFetching ? (
-						<Skeleton />
+						<SkeletonForBacket />
 					) : data?.length !== 0 && !!data ? (
 						data.map(item => <FavoritesElement key={item.id} {...item} />)
 					) : (

@@ -17,4 +17,12 @@ RecipeSkeleton.metadata = {
 	filename: 'DevtoCard',
 }
 
+export const SkeletonForRecipes = () => (
+	<>
+		<RecipeSkeleton />
+		<RecipeSkeleton />
+		<RecipeSkeleton />
+	</>
+)
+
 export default RecipeSkeleton

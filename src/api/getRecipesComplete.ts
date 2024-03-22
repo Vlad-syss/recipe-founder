@@ -22,6 +22,7 @@ export const getRecipesComplete = async (
 			},
 			{ concurrency: 5 }
 		)
+		console.log(responses)
 
 		return responses
 	} catch (error) {

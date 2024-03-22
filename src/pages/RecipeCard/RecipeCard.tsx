@@ -5,22 +5,19 @@ import { Link, useParams } from 'react-router-dom'
 import { getRecipeById } from '../../api'
 import { ProductItem } from '../../components/Product/ProductItem'
 import { RecipeItem } from '../../components/Recipes/RecipeItem'
-import { Skeleton } from '../../components/Recipes/Recipes'
 import ProductSkeleton from '../../components/Skeleton/ProductSkeleton'
+import { SkeletonForRecipes } from '../../components/Skeleton/RecipeSkeleton'
 import { Compilation } from '../../types'
 import style from './recipe-card.module.scss'
 
 const RecipeCard = () => {
 	const { id } = useParams()
-
 	if (!id) return
 
 	const { data, isFetching } = useQuery({
 		queryKey: ['recipe'],
 		queryFn: () => getRecipeById(id),
 	})
-
-	console.log(data)
 
 	return (
 		<>
@@ -41,7 +38,7 @@ const RecipeCard = () => {
 					<h2>Same recipes:</h2>
 					<div className={style.similiar}>
 						{isFetching ? (
-							<Skeleton />
+							<SkeletonForRecipes />
 						) : data?.compilations.length !== 0 ? (
 							data?.compilations.map((item: Compilation) => (
 								<Fragment key={item.id}>

@@ -11,6 +11,7 @@ interface InputProps {
 	id?: string | undefined
 	placeholder?: string
 	onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void
+	disabled: boolean
 }
 
 const Input: FC<InputProps> = ({
@@ -22,6 +23,7 @@ const Input: FC<InputProps> = ({
 	id,
 	placeholder,
 	onKeyDown,
+	disabled,
 }) => {
 	return (
 		<input
@@ -33,6 +35,7 @@ const Input: FC<InputProps> = ({
 			onBlur={onBlur}
 			placeholder={placeholder}
 			onKeyDown={onKeyDown}
+			disabled={disabled}
 		/>
 	)
 }
