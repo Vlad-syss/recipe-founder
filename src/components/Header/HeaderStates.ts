@@ -10,7 +10,7 @@ const useHeaderStates = () => {
 
 	const onBlurInput = useCallback(
 		(e: ChangeEvent<HTMLInputElement>) =>
-			(e.target.placeholder = "Type the ingredients devided by ' , ' ..."),
+			(e.target.placeholder = 'Type the keywords of meal devided by ","...'),
 		[value]
 	)
 

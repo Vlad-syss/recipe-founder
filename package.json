@@ -16,6 +16,7 @@
     "clsx": "^2.1.0",
     "hls.js": "^1.5.7",
     "lucide-react": "^0.351.0",
+    "p-map": "^7.0.1",
     "react": "^18.2.0",
     "react-content-loader": "^6.2.1",
     "react-dom": "^18.2.0",

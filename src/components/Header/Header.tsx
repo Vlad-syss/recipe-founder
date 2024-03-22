@@ -1,23 +1,24 @@
-import { useQuery } from '@tanstack/react-query'
 import { Search } from 'lucide-react'
-import { KeyboardEvent, MouseEvent, memo, useState } from 'react'
+import { FC, KeyboardEvent, MouseEvent, memo } from 'react'
 import { getRecipesComplete } from '../../api'
 import { Input } from '../../uikit'
 import { useHeaderStates } from './HeaderStates'
 import style from './header.module.scss'
 
-const Header = () => {
-	const { onBlurInput, onChangeInput, onFocusInput, value } = useHeaderStates()
-	const [names, setNames] = useState([''])
-	const { data } = useQuery({
-		queryKey: ['recipes', names],
-		queryFn: () => getRecipesComplete(names),
-	})
+interface HeaderProps {
+	onFilterChange: (event: any) => void
+}
 
-	const handleSubmit = () => {
+const Header: FC<HeaderProps> = ({ onFilterChange }) => {
+	const { onBlurInput, onChangeInput, onFocusInput, value } = useHeaderStates()
+
+	const handleSubmit = async () => {
 		const name = value.trim().split(',')
-		setNames(name)
-		console.log(data)
+		const filteredData = await getRecipesComplete(name)
+		const formattedFilteredData =
+			filteredData?.flatMap((item: any) => [...item.results]) || []
+
+		onFilterChange(formattedFilteredData)
 	}
 
 	const handleInteraction = (
@@ -39,7 +40,7 @@ const Header = () => {
 					onChange={onChangeInput}
 					onFocus={onFocusInput}
 					onBlur={onBlurInput}
-					placeholder='Type the meal or meals devided by " , " ...'
+					placeholder='Type the keywords of meal devided by ","...'
 					onKeyDown={handleInteraction}
 				/>
 				<button onClick={handleInteraction}>

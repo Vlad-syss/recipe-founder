@@ -3,11 +3,16 @@ import {
 	useInfiniteQuery,
 	UseInfiniteQueryResult,
 } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getAllRecipes } from '../api'
-import { InfinityRecipe } from '../types'
+import { getFilteredRecipes } from '../api/getFilteredRecipes'
+import { InfinityRecipe, SearchKeys } from '../types'
 
-const useInfinityRecipe = () => {
+interface hookProps {
+	filteredData: SearchKeys[] | null
+}
+
+const useInfinityRecipe = ({ filteredData }: hookProps) => {
 	const [isFetchingFirstPage, setIsFetchingFirstPage] = useState(true)
 
 	const {
@@ -20,13 +25,26 @@ const useInfinityRecipe = () => {
 	}: UseInfiniteQueryResult<InfinityRecipe> = useInfiniteQuery({
 		queryKey: ['recipes'] as QueryKey,
 		queryFn: async ({ pageParam = 1 }) => {
-			const response = await getAllRecipes(pageParam)
-			setIsFetchingFirstPage(false)
-			return response
+			try {
+				if (filteredData && filteredData.length > 0) {
+					return await getFilteredRecipes(pageParam, filteredData)
+				} else {
+					return await getAllRecipes(pageParam)
+				}
+			} finally {
+				setIsFetchingFirstPage(false)
+			}
 		},
 		getNextPageParam: (_, pages) => pages.length + 1,
 		initialPageParam: 1,
+		enabled: !!filteredData,
 	})
+
+	useEffect(() => {
+		if (filteredData) {
+			refetch()
+		}
+	}, [filteredData, refetch])
 
 	return {
 		data,

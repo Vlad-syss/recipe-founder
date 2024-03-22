@@ -1,4 +1,5 @@
 import axios from 'axios'
+import pMap from 'p-map'
 import { RecipeType } from '../types'
 import { headers } from './getAllRecipes'
 
@@ -10,17 +11,19 @@ export const getRecipesComplete = async (
 		url: 'https://tasty.p.rapidapi.com/recipes/auto-complete',
 		headers: headers,
 	}
-	console.log(names)
 
 	try {
-		// Fetch all recipes concurrently
-		const promises = names.map(name => {
-			const params = { prefix: name }
-			return axios.request<RecipeType>({ ...options, params })
-		})
+		const responses = await pMap(
+			names,
+			async (name: string) => {
+				const params = { prefix: name }
+				const response = await axios.request<RecipeType>({ ...options, params })
+				return response.data
+			},
+			{ concurrency: 5 }
+		)
 
-		const responses = await Promise.all(promises)
-		return responses.map(response => response.data)
+		return responses
 	} catch (error) {
 		console.error(error)
 		throw error

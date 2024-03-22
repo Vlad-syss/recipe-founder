@@ -1,6 +1,7 @@
 import { useIntersection } from '@mantine/hooks'
 import { FC, useEffect } from 'react'
 import { useInfinityRecipe } from '../../hooks'
+import { SearchKeys } from '../../types'
 import RecipeSkeleton from '../Skeleton/RecipeSkeleton'
 import { RecipeList } from './RecipeList'
 import style from './recipes.module.scss'
@@ -13,9 +14,11 @@ export const Skeleton = () => (
 	</>
 )
 
-interface RecipesProps {}
+interface RecipesProps {
+	filteredData: SearchKeys[] | null
+}
 
-const Recipes: FC<RecipesProps> = () => {
+const Recipes: FC<RecipesProps> = ({ filteredData }) => {
 	const {
 		data,
 		isError,
@@ -23,7 +26,9 @@ const Recipes: FC<RecipesProps> = () => {
 		isFetching,
 		isFetchingNextPage,
 		isFetchingFirstPage,
-	} = useInfinityRecipe()
+	} = useInfinityRecipe({
+		filteredData: filteredData,
+	})
 
 	const { ref, entry } = useIntersection({
 		root: null,
@@ -35,6 +40,7 @@ const Recipes: FC<RecipesProps> = () => {
 	}, [entry])
 
 	const recipes = data?.pages.flatMap(page => page.results) || []
+	console.log(data)
 
 	return (
 		<main className={style.main}>

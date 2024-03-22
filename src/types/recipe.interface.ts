@@ -102,3 +102,14 @@ export type UserRatings = {
 	count_positive: number
 	score: number
 }
+
+export type SearchKeys = {
+	display: string
+	search_value: string
+	type: string
+}
+
+export type ResultsRecipes = {
+	count: number
+	results: RecipeType[]
+}
