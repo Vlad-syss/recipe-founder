@@ -32,6 +32,7 @@ const Recipes: FC<RecipesProps> = ({ filteredData }) => {
 	}, [entry])
 
 	const recipes = data?.pages.flatMap(page => page.results) || []
+	console.log(recipes)
 
 	return (
 		<main className={style.main}>
@@ -47,6 +48,11 @@ const Recipes: FC<RecipesProps> = ({ filteredData }) => {
 				{isFetchingNextPage && <SkeletonForRecipes />}
 				<div ref={ref}></div>
 			</div>
+			{recipes.length === 0 && (
+				<>
+					<p>Not found!</p>
+				</>
+			)}
 		</main>
 	)
 }

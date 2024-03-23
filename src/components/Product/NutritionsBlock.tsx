@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import { RecipeType } from '../../types'
 import style from './product-item.module.scss'
 
@@ -6,7 +6,7 @@ interface NutritionsBlockProps {
 	data: RecipeType
 }
 
-const NutritionsBlock: FC<NutritionsBlockProps> = ({ data }) => (
+const NutritionsBlock: FC<NutritionsBlockProps> = memo(({ data }) => (
 	<div className={style.block}>
 		<h3>Nutritions:</h3>
 		<ul>
@@ -18,6 +18,6 @@ const NutritionsBlock: FC<NutritionsBlockProps> = ({ data }) => (
 			<li>sugar: {data.nutrition.sugar}</li>
 		</ul>
 	</div>
-)
+))
 
 export { NutritionsBlock }

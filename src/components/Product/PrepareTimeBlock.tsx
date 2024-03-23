@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import { RecipeType } from '../../types'
 import style from './product-item.module.scss'
 
@@ -6,7 +6,7 @@ interface PrepareTimeBlockProps {
 	data: RecipeType
 }
 
-const PrepareTimeBlock: FC<PrepareTimeBlockProps> = ({ data }) => (
+const PrepareTimeBlock: FC<PrepareTimeBlockProps> = memo(({ data }) => (
 	<div className={style.block}>
 		<h3>
 			Prepare time:{' '}
@@ -17,6 +17,6 @@ const PrepareTimeBlock: FC<PrepareTimeBlockProps> = ({ data }) => (
 			</span>
 		</h3>
 	</div>
-)
+))
 
 export { PrepareTimeBlock }

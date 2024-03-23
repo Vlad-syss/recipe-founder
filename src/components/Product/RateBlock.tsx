@@ -1,5 +1,5 @@
 import { ThumbsDown, ThumbsUp } from 'lucide-react'
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import { RecipeType } from '../../types'
 import style from './product-item.module.scss'
 
@@ -7,7 +7,7 @@ interface RateBlockProps {
 	data: RecipeType
 }
 
-const RateBlock: FC<RateBlockProps> = ({ data }) => (
+const RateBlock: FC<RateBlockProps> = memo(({ data }) => (
 	<div className={style.block}>
 		<h3>Rate:</h3>
 		<p className={style.text}>
@@ -19,6 +19,6 @@ const RateBlock: FC<RateBlockProps> = ({ data }) => (
 			</span>
 		</p>
 	</div>
-)
+))
 
 export { RateBlock }

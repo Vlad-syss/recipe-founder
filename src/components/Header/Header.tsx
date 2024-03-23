@@ -1,8 +1,9 @@
 import clsx from 'clsx'
 import { Loader2, Search } from 'lucide-react'
-import { FC, memo } from 'react'
+import { FC } from 'react'
 import { Input } from '../../uikit'
 import { useHeaderStates } from './HeaderStates'
+import { StaticValues } from './StaticValues'
 import style from './header.module.scss'
 
 interface HeaderProps {
@@ -43,16 +44,5 @@ const Header: FC<HeaderProps> = ({ onFilterChange }) => {
 		</header>
 	)
 }
-
-const StaticValues = memo(() => (
-	<>
-		<h1>Find Meals For Your Ingredient</h1>
-		<p>
-			Real food doesn't have ingredient, real food is ingredients.
-			<br />
-			<span> - Jamie Oliver</span>
-		</p>
-	</>
-))
 
 export { Header }

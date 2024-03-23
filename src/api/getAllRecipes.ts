@@ -2,7 +2,8 @@ import axios from 'axios'
 import { RecipeType } from '../types'
 
 export const headers = {
-	'X-RapidAPI-Key': '3c52505409mshf85548df959ad7ap1ffd53jsn52023178f206',
+	'X-RapidAPI-Key': '8720ebb874msh9db45593f1ea2e8p139e97jsn7f65aa2bb6dc',
+
 	'X-RapidAPI-Host': 'tasty.p.rapidapi.com',
 }
 

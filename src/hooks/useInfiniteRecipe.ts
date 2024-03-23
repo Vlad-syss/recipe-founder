@@ -26,7 +26,7 @@ const useInfinityRecipe = ({ filteredData }: hookProps) => {
 		queryKey: ['recipes'] as QueryKey,
 		queryFn: async ({ pageParam = 1 }) => {
 			try {
-				if (filteredData && filteredData.length > 0) {
+				if (filteredData) {
 					return await getFilteredRecipes(pageParam, filteredData)
 				} else {
 					return await getAllRecipes(pageParam)
