@@ -1,0 +1,38 @@
+.price-range-slider {
+	position: relative;
+	width: 87%;
+	margin: 0 auto;
+	height: 25px;
+	background-color: #ccc;
+	border-radius: 5px;
+}
+
+.range {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	height: 25px;
+	background-color: #e67811;
+	border-radius: 15px;
+}
+
+.handle {
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	background-color: #fff;
+	border: 2px solid #ccc;
+	border-radius: 10%;
+	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+	cursor: pointer;
+	top: 48%;
+	transform: translate(-50%, -50%);
+}
+
+.price-label {
+	position: absolute;
+	font-size: 11px;
+	font-weight: 600;
+	top: -20px;
+	margin-right: 10px;
+}
