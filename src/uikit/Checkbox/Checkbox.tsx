@@ -1,8 +1,8 @@
 import clsx from 'clsx'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import style from './checkbox.module.scss'
 
-const Checkbox = ({ title }: { title: string }) => {
+const Checkbox = memo(({ title }: { title: string }) => {
 	const [checked, setChecked] = useState(false)
 
 	const toggleCheckbox = () => {
@@ -18,6 +18,6 @@ const Checkbox = ({ title }: { title: string }) => {
 			{title}
 		</label>
 	)
-}
+})
 
 export { Checkbox }

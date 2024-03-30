@@ -1,3 +1,4 @@
+export { BackHome } from './BackHome/BackHome'
 export { Checkbox } from './Checkbox/Checkbox'
 export { Container } from './Container/Container'
 export { Input } from './Input/Input'

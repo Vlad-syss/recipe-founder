@@ -1,11 +1,11 @@
-import { Dispatch, FC, SetStateAction } from 'react'
+import { Dispatch, FC, SetStateAction, memo } from 'react'
 import './star-rating.scss'
 
 interface StarProps {
 	rating: number
 	setRating: Dispatch<SetStateAction<number>>
 }
-const StarRating: FC<StarProps> = ({ rating, setRating }) => {
+const StarRating: FC<StarProps> = memo(({ rating, setRating }) => {
 	const handleRatingChange = (value: number) => {
 		setRating(value)
 	}
@@ -104,6 +104,6 @@ const StarRating: FC<StarProps> = ({ rating, setRating }) => {
 			<label className='half' htmlFor='rating1' title='1/2 star'></label>
 		</fieldset>
 	)
-}
+})
 
 export { StarRating }

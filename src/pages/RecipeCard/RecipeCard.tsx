@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query'
-import { Undo2 } from 'lucide-react'
 import { Fragment } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { getRecipeById } from '../../api'
 import { ProductItem } from '../../components/Product/ProductItem'
 import { RecipeItem } from '../../components/Recipes/RecipeItem'
 import ProductSkeleton from '../../components/Skeleton/ProductSkeleton'
 import { SkeletonForRecipes } from '../../components/Skeleton/RecipeSkeleton'
 import { Compilation } from '../../types'
+import { BackHome } from '../../uikit'
 import style from './recipe-card.module.scss'
 
 const RecipeCard = () => {
@@ -22,9 +22,7 @@ const RecipeCard = () => {
 	return (
 		<>
 			<div className={style.wrapper}>
-				<Link to={'/'}>
-					Back Home <Undo2 size={16} />
-				</Link>
+				<BackHome />
 				<div className={style.item}>
 					{isFetching ? (
 						<ProductSkeleton />
@@ -33,6 +31,7 @@ const RecipeCard = () => {
 					) : (
 						<p>Something go wrong...</p>
 					)}
+					B
 				</div>
 				<div className={style.more}>
 					<h2>Same recipes:</h2>
