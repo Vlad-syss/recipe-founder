@@ -5,7 +5,6 @@ import style from './catalog.module.scss'
 
 const Catalog = memo(() => {
 	//TODO:
-	// ZUSTAND STATE FOR CHECKBOX AND FOR ALL SPOLLERS....
 
 	/**
 	 * ---Sidebar:---
@@ -36,3 +35,4 @@ const Catalog = memo(() => {
 })
 
 export { Catalog }
+

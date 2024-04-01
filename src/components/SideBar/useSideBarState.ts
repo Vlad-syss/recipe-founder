@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction, useCallback, useState } from 'react'
+import { useCatalogList } from '../../store'
 
 interface SideBarState {
 	priceRange: [number, number]
@@ -8,12 +9,14 @@ interface SideBarState {
 	handleClear: () => void
 	handleCategory: (categoryTitle: string) => void
 	setRating: Dispatch<SetStateAction<number>>
+	state: any
 }
 
 const useSideBarState = (): SideBarState => {
 	const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000])
 	const [rating, setRating] = useState(0)
 	const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+	const state = useCatalogList(state => state)
 
 	const handlePriceRangeChange = useCallback((range: [number, number]) => {
 		setPriceRange(range)
@@ -24,17 +27,12 @@ const useSideBarState = (): SideBarState => {
 	}, [])
 	const handleCategory = useCallback((categoryTitle: string) => {
 		setSelectedCategory(currentCategory => {
-			console.log(categoryTitle)
-			console.log(currentCategory)
+			// console.log(categoryTitle)
+			// console.log(currentCategory)
 			return categoryTitle === currentCategory ? null : categoryTitle
 		})
 	}, [])
-	console.log({
-		rating: rating,
-		selectedCategory: selectedCategory,
-		calories: priceRange,
-	})
-
+	
 	return {
 		priceRange,
 		rating,
@@ -43,7 +41,9 @@ const useSideBarState = (): SideBarState => {
 		handleClear,
 		handleCategory,
 		setRating,
+		state
 	}
 }
 
 export { useSideBarState }
+

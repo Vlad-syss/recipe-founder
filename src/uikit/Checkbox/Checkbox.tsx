@@ -1,13 +1,17 @@
 import clsx from 'clsx'
-import { memo, useState } from 'react'
+import { FC, memo } from 'react'
 import style from './checkbox.module.scss'
 
-const Checkbox = memo(({ title }: { title: string }) => {
-	const [checked, setChecked] = useState(false)
+interface CheckboxProps {
+  title: string;
+  checked: boolean;
+  onChange: () => void;
+}
 
-	const toggleCheckbox = () => {
-		setChecked(!checked)
-	}
+const Checkbox: FC<CheckboxProps> = memo(({ title, checked, onChange }) => {
+  const toggleCheckbox = () => {
+    onChange();
+  };
 
 	return (
 		<label className={style.checkbox_container}>
@@ -21,3 +25,4 @@ const Checkbox = memo(({ title }: { title: string }) => {
 })
 
 export { Checkbox }
+

@@ -18,7 +18,18 @@ const SideBar = memo(() => {
 		handleClear,
 		handleCategory,
 		setRating,
+		state
 	} = useSideBarState()
+
+	const onHandleSubmit = () => {
+		console.log({
+			rating: rating/2,
+			selectedCategory: selectedCategory,
+			calories: priceRange,
+			keywords: state.selectedItems.keywords,
+			credits: state.selectedItems.credits 
+		})	
+	}
 
 	return (
 		<nav className={style.sidebar}>
@@ -51,9 +62,10 @@ const SideBar = memo(() => {
 			<Spoller title='Star Rate' isOpen={true}>
 				<StarRate rating={rating} setRating={setRating} />
 			</Spoller>
-			<button className={style.btn_submit}>Submit</button>
+			<button className={style.btn_submit} onClick={onHandleSubmit}>Submit</button>
 		</nav>
 	)
 })
 
 export { SideBar }
+
