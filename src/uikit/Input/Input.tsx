@@ -11,7 +11,7 @@ interface InputProps {
 	id?: string | undefined
 	placeholder?: string
 	onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void
-	disabled: boolean
+	disabled?: boolean
 }
 
 const Input: FC<InputProps> = ({
@@ -41,3 +41,4 @@ const Input: FC<InputProps> = ({
 }
 
 export { Input }
+

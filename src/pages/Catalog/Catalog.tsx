@@ -1,24 +1,17 @@
 import { memo } from 'react'
+import { Display } from '../../components/Display/Display'
 import { SideBar } from '../../components/SideBar/SideBar'
 import { BackHome } from '../../uikit'
 import style from './catalog.module.scss'
 
 const Catalog = memo(() => {
-	//TODO:
-
 	/**
-	 * ---Sidebar:---
-	 *  Nutritions calories,
-	 *  Star Rating,
-	 *  Keywords search(popular proposal),
-	 *  Type credits(like checkbox),
-	 *  Categories
+	 * ---Sidebar:--
 	 *  Submit Button,
 	 * 	...
 	 * ---Display:---
 	 * 	Search input (like main),
 	 * 	Functionality to switch display,
-	 * 	Recipe item and start rating,
 	 * 	Sort by rating, popularity and so on...,
 	 * 	...
 	 **/
@@ -28,11 +21,10 @@ const Catalog = memo(() => {
 			<BackHome />
 			<div className={style.catalog}>
 				<SideBar />
-				<div className={style.items}>Catalog</div>
+				<Display />
 			</div>
 		</div>
 	)
 })
 
 export { Catalog }
-

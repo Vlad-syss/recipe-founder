@@ -7,7 +7,8 @@ export const headers = {
 }
 
 export const getAllRecipes = async (
-	page: number
+	page: number,
+	count?: number | undefined
 ): Promise<{
 	count: number
 	results: RecipeType[]
@@ -21,15 +22,15 @@ export const getAllRecipes = async (
 		},
 		headers: headers,
 	}
-
 	try {
+		const changeCount = count ? count : 6
 		const { data } = await axios.request<{
 			count: number
 			results: RecipeType[]
 		}>(options)
 		const formattedData = {
 			...data,
-			results: data.results.slice((page - 1) * 6, page * 6),
+			results: data.results.slice((page - 1) * changeCount, page * changeCount),
 		}
 
 		return formattedData
