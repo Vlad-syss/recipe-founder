@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useCallback, useState } from 'react'
+import { Dispatch, SetStateAction, useCallback, useRef, useState } from 'react'
 import { useCatalogList } from '../../store'
 
 interface SideBarState {
@@ -10,6 +10,11 @@ interface SideBarState {
 	handleCategory: (categoryTitle: string) => void
 	setRating: Dispatch<SetStateAction<number>>
 	state: any
+	isOpen: boolean
+	setIsOpen: Dispatch<SetStateAction<boolean>>
+	unlock: boolean
+	timeout: number
+	btnRef: any
 }
 
 const useSideBarState = (): SideBarState => {
@@ -17,6 +22,10 @@ const useSideBarState = (): SideBarState => {
 	const [rating, setRating] = useState(0)
 	const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
 	const state = useCatalogList(state => state)
+	const [isOpen, setIsOpen] = useState(false)
+	const btnRef = useRef<HTMLButtonElement>(null)
+	const timeout = 800
+	let unlock = true
 
 	const handlePriceRangeChange = useCallback((range: [number, number]) => {
 		setPriceRange(range)
@@ -32,7 +41,7 @@ const useSideBarState = (): SideBarState => {
 			return categoryTitle === currentCategory ? null : categoryTitle
 		})
 	}, [])
-	
+
 	return {
 		priceRange,
 		rating,
@@ -41,9 +50,13 @@ const useSideBarState = (): SideBarState => {
 		handleClear,
 		handleCategory,
 		setRating,
-		state
+		state,
+		unlock,
+		isOpen,
+		setIsOpen,
+		timeout,
+		btnRef,
 	}
 }
 
 export { useSideBarState }
-

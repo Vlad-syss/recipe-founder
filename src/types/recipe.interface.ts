@@ -113,3 +113,11 @@ export type ResultsRecipes = {
 	count: number
 	results: RecipeType[]
 }
+
+export type Filters = {
+	rating: number | undefined | null
+	selectedCategory: string | undefined | null
+	calories: number[] | undefined | null
+	keywords: string[] | undefined | null
+	credits: string[] | undefined | null
+}

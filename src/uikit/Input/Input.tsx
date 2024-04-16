@@ -41,4 +41,3 @@ const Input: FC<InputProps> = ({
 }
 
 export { Input }
-

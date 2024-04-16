@@ -5,7 +5,8 @@ import { headers } from './getAllRecipes'
 
 export const getFilteredRecipes = async (
 	page: number,
-	filteredData: SearchKeys[]
+	filteredData: SearchKeys[],
+	count?: number | undefined
 ): Promise<ResultsRecipes> => {
 	const options = {
 		method: 'GET',
@@ -32,10 +33,11 @@ export const getFilteredRecipes = async (
 		)
 
 		const combinedData = responseData.flat()
+		const changeCount = count ? count : 6
 
 		return {
 			count: 10,
-			results: combinedData.slice((page - 1) * 6, page * 6),
+			results: combinedData.slice((page - 1) * changeCount, page * changeCount),
 		}
 	} catch (error) {
 		console.error(error)

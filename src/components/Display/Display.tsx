@@ -8,15 +8,23 @@ import { useDisplay } from './useDisplay'
 
 const Display = memo(() => {
 	const {
-		data,
+		sortedData,
 		handleInteraction,
 		isError,
-		isLoading,
+		isFetching,
 		onBlurInput,
-		onChangeInput,
 		onFocusInput,
 		page,
 		value,
+		handlePopular,
+		handleRecent,
+		isPopular,
+		isRecent,
+		setIsPopular,
+		setIsRecent,
+		setValue,
+		handlePages,
+		isLoaded,
 	} = useDisplay()
 
 	return (
@@ -24,18 +32,32 @@ const Display = memo(() => {
 			<div className={style.items__filters}>
 				<ItemsSearch
 					value={value}
-					onChange={onChangeInput}
+					setValue={setValue}
 					onFocus={onFocusInput}
 					onBlur={onBlurInput}
 					onKeyDown={handleInteraction}
+					onClick={handleInteraction}
+					isLoaded={isLoaded}
 				/>
-				<ItemsSortBy />
+				<ItemsSortBy
+					handlePopular={handlePopular}
+					isPopular={isPopular}
+					setIsPopular={setIsPopular}
+					handleRecent={handleRecent}
+					isRecent={isRecent}
+					setIsRecent={setIsRecent}
+				/>
 			</div>
 			<div className={style.items__items}>
-				<DisplayOutput isLoading={isLoading} data={data} isError={isError} />
+				<DisplayOutput
+					isLoading={isFetching}
+					data={sortedData}
+					isError={isError}
+				/>
 				<DisplayPages
-					data={data}
-					handleInteraction={handleInteraction}
+					isLoading={isFetching}
+					data={sortedData}
+					handlePages={handlePages}
 					page={page}
 				/>
 			</div>

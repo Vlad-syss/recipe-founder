@@ -1,5 +1,5 @@
 import { Heart, Star } from 'lucide-react'
-import { memo } from 'react'
+import { memo, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useFavorite } from '../../store'
 import { RecipeType } from '../../types'
@@ -21,15 +21,18 @@ const DisplayCard = memo(({ recipe }: { recipe: RecipeType }) => {
 		navigate(`/products/${id}`)
 	}
 
-	function convertToStarsRatio(negative: number, positive: number) {
-		let totalReviews = negative + positive
-		let ratio = positive / totalReviews
-		let stars = ratio * 5
+	const convertToStarsRatio = useCallback(
+		(negative: number, positive: number) => {
+			let totalReviews = negative + positive
+			let ratio = positive / totalReviews
+			let stars = ratio * 5
 
-		stars = +stars.toFixed(1)
+			stars = +stars.toFixed(1)
 
-		return stars
-	}
+			return stars
+		},
+		[]
+	)
 
 	return (
 		<div

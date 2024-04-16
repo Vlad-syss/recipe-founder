@@ -19,6 +19,12 @@ button {
 			text-align: center;
 			padding-top: 15px;
 			border-top: 1px solid #656565cf;
+			opacity: 1;
+			transition: all 0.3s ease-in-out;
+			&.show {
+				opacity: 0;
+				transform: translateY(-20px);
+			}
 		}
 	}
 	&__filters {
@@ -50,6 +56,13 @@ button {
 			&:hover {
 				background: #f68c0a;
 			}
+
+			&:disabled {
+				opacity: 0.5;
+				svg {
+					animation: load 0.8s infinite;
+				}
+			}
 		}
 	}
 
@@ -71,6 +84,15 @@ button {
 			font-weight: 600;
 			text-transform: uppercase;
 			transition: all 0.3s;
+			& > svg {
+				transition: all 0.3s;
+			}
+			&.active {
+				background: #f9b917;
+				& > svg {
+					transform: rotate(180deg);
+				}
+			}
 			&:hover {
 				background: #f9b917;
 			}
@@ -170,11 +192,20 @@ button {
 			}
 			&:disabled {
 				opacity: 0.4;
-				cursor: not-allowed;
+				pointer-events: none;
 			}
 			& > svg {
 				pointer-events: none;
 			}
 		}
+	}
+}
+
+@keyframes load {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
 	}
 }

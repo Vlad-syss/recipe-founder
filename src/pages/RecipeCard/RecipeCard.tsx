@@ -31,7 +31,6 @@ const RecipeCard = () => {
 					) : (
 						<p>Something go wrong...</p>
 					)}
-					B
 				</div>
 				<div className={style.more}>
 					<h2>Same recipes:</h2>

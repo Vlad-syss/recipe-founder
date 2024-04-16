@@ -2,7 +2,7 @@ import axios from 'axios'
 import { RecipeType } from '../types'
 
 export const headers = {
-	'X-RapidAPI-Key': '97cc14a36dmshf086460c36980aap18b37djsn1677861de1cc',
+	'X-RapidAPI-Key': 'b4803c9a73mshd3c8d85bc69d789p1c84a4jsn7f50cf1a7a73',
 	'X-RapidAPI-Host': 'tasty.p.rapidapi.com',
 }
 
@@ -18,7 +18,7 @@ export const getAllRecipes = async (
 		url: 'https://tasty.p.rapidapi.com/recipes/list',
 		params: {
 			from: '0',
-			size: '50',
+			size: '100',
 		},
 		headers: headers,
 	}

@@ -1,5 +1,6 @@
 export type {
 	Compilation,
+	Filters,
 	InfinityRecipe,
 	RecipeType,
 	ResultsRecipes,

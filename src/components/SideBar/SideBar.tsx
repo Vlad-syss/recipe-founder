@@ -1,13 +1,19 @@
-import { memo } from 'react'
+import { memo, useState } from 'react'
+import { createPortal } from 'react-dom'
+import { usePopup } from '../../hooks'
+import { Filters } from '../../types'
 import { Spoller } from '../../uikit'
 import { CategoryButton } from './CategoryButton'
 import { CreditList } from './CreditList'
 import { KeywordList } from './KeyWordList'
 import { NutritionsRange } from './NutritionsRange'
+import { SideBarPopup } from './SideBarPopup'
 import { StarRate } from './StarRate'
 import { categories, credits, keywords } from './lists'
 import style from './side-bar.module.scss'
 import { useSideBarState } from './useSideBarState'
+
+const root = document.querySelector('#root')
 
 const SideBar = memo(() => {
 	const {
@@ -18,17 +24,31 @@ const SideBar = memo(() => {
 		handleClear,
 		handleCategory,
 		setRating,
-		state
+		state,
+		btnRef,
+		isOpen,
+		setIsOpen,
+		timeout,
+		unlock,
 	} = useSideBarState()
+	const { popupClose, popupOpen } = usePopup({
+		isOpen: isOpen,
+		lock: style.lock,
+		setIsOpen: setIsOpen,
+		timeout: timeout,
+		unlock: unlock,
+	})
+	const [filters, setFilters] = useState<Filters>()
 
 	const onHandleSubmit = () => {
-		console.log({
-			rating: rating/2,
+		setFilters({
+			rating: rating / 2,
 			selectedCategory: selectedCategory,
 			calories: priceRange,
 			keywords: state.selectedItems.keywords,
-			credits: state.selectedItems.credits 
-		})	
+			credits: state.selectedItems.credits,
+		})
+		popupOpen(btnRef.current)
 	}
 
 	return (
@@ -62,10 +82,25 @@ const SideBar = memo(() => {
 			<Spoller title='Star Rate' isOpen={true}>
 				<StarRate rating={rating} setRating={setRating} />
 			</Spoller>
-			<button className={style.btn_submit} onClick={onHandleSubmit}>Submit</button>
+			<button
+				className={style.btn_submit}
+				onClick={onHandleSubmit}
+				ref={btnRef}
+			>
+				Submit
+			</button>
+			{root &&
+				createPortal(
+					<SideBarPopup
+						isOpen={isOpen}
+						setIsOpen={setIsOpen}
+						popupClose={popupClose}
+						filters={filters}
+					/>,
+					root
+				)}
 		</nav>
 	)
 })
 
 export { SideBar }
-
