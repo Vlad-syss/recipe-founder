@@ -7,13 +7,12 @@ import style from './catalog.module.scss'
 const Catalog = memo(() => {
 	/**
 	 * ---Sidebar:--
-	 *  Submit Button,
+	 *  Submit Button,---
 	 * 	...
 	 * ---Display:---
-	 * 	Search input (like main),
-	 * 	Functionality to switch display,
-	 * 	Sort by rating, popularity and so on...,
+	 * 	Functionality to switch display,---
 	 * 	...
+	 * ADAPTIVE
 	 **/
 
 	return (

@@ -16,7 +16,6 @@ interface PopupProps {
 const usePopup = ({
 	isOpen,
 	setIsOpen,
-	unlock,
 	timeout,
 	lock,
 }: PopupProps): PopupActions => {
@@ -40,17 +39,20 @@ const usePopup = ({
 		document.body.style.paddingRight = padding
 		document.body.classList.add(lock)
 
-		unlock = false
+		// Instead of trying to modify the 'unlock' parameter directly,
+		// you should handle the unlocking logic separately.
+
+		// For example, you could have a local variable to track the locking state.
+		let isLocked = true
+
 		setTimeout(() => {
-			unlock = true
+			isLocked = false // Unlock after the specified timeout
 		}, timeout)
 	}
 
 	const bodyUnlock = () => {
-		setTimeout(() => {
-			document.body.style.paddingRight = '0px'
-			document.body.classList.remove(lock)
-		}, timeout)
+		document.body.style.paddingRight = '0px'
+		document.body.classList.remove(lock)
 	}
 
 	return {
