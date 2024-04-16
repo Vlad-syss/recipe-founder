@@ -39,15 +39,13 @@ const usePopup = ({
 		document.body.style.paddingRight = padding
 		document.body.classList.add(lock)
 
-		// Instead of trying to modify the 'unlock' parameter directly,
-		// you should handle the unlocking logic separately.
-
-		// For example, you could have a local variable to track the locking state.
-		let isLocked = true
+		let isLocked = true // Initialize the variable
 
 		setTimeout(() => {
-			isLocked = false // Unlock after the specified timeout
+			isLocked = false // Update the variable after the timeout
 		}, timeout)
+
+		return isLocked // Return the locking state if needed
 	}
 
 	const bodyUnlock = () => {
