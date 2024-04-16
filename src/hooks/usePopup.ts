@@ -13,12 +13,7 @@ interface PopupProps {
 	lock: string
 }
 
-const usePopup = ({
-	isOpen,
-	setIsOpen,
-	timeout,
-	lock,
-}: PopupProps): PopupActions => {
+const usePopup = ({ isOpen, setIsOpen, lock }: PopupProps): PopupActions => {
 	const popupOpen = (currentPopup: any) => {
 		if (currentPopup && isOpen === true) {
 			popupClose()
@@ -39,13 +34,13 @@ const usePopup = ({
 		document.body.style.paddingRight = padding
 		document.body.classList.add(lock)
 
-		let isLocked = true // Initialize the variable
+		// let isLocked = true // Initialize the variable
 
-		setTimeout(() => {
-			isLocked = false // Update the variable after the timeout
-		}, timeout)
+		// setTimeout(() => {
+		// 	isLocked = false // Update the variable after the timeout
+		// }, timeout)
 
-		return isLocked // Return the locking state if needed
+		// return isLocked // Return the locking state if needed
 	}
 
 	const bodyUnlock = () => {
