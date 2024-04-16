@@ -33,14 +33,6 @@ const usePopup = ({ isOpen, setIsOpen, lock }: PopupProps): PopupActions => {
 
 		document.body.style.paddingRight = padding
 		document.body.classList.add(lock)
-
-		// let isLocked = true // Initialize the variable
-
-		// setTimeout(() => {
-		// 	isLocked = false // Update the variable after the timeout
-		// }, timeout)
-
-		// return isLocked // Return the locking state if needed
 	}
 
 	const bodyUnlock = () => {
